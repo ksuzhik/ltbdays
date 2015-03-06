@@ -1,0 +1,14 @@
+<h1 id="month" class = "month">
+  <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-%d"), remote: true %>
+    <%=h @date.strftime("%B %Y") %>
+  <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-%d"), remote: true %>
+</h1>
+<%= calendar_for(@users , :year => @date.year, :month => @date.month, :first_day_of_week => 1) do |t| %>
+  <%= t.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
+  <%= t.day(:day_method => :this_year_birthdate) do |day, tasks| %> 
+    <%= day.day %>
+    <% tasks.each do |task| %>
+      <%= h(link_to "#{task.first_name} #{task.last_name}", task) %>
+    <% end %>
+  <% end %>
+<% end %>

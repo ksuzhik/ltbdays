@@ -1,0 +1,27 @@
+<h1>Users:</h1>
+<%= form_tag users_path, :method => 'get', remote: true, class: "form-inline" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", class: "btn btn-custom" %>
+  </p>
+<% end %>
+  
+<%= table_for(@users, :html => {:class => 'table table-hover'}) do |t| %>
+  <%= t.head do %>
+    <%= t.r do %>
+      <%= t.h('Name') %>
+      <%= t.h('Birthday') %>
+      <%= t.h('Delete') if current_user.admin? %>
+    <% end %>
+  <% end %>
+  <%= t.body do |user| %>
+    <%= t.r do %>
+      <%= t.d(link_to "#{user.first_name} #{user.last_name}", user) %>
+      <%= t.d(h(user.birthdate)) %>
+      <% if current_user.admin? && !current_user?(user) %>
+        <%= t.d(link_to "delete", user, method: :delete, remote: true, data: { confirm: "You sure?" })%>
+      <% end %>  
+    <% end %>
+  <% end %>
+<% end %>
+<%= will_paginate%>

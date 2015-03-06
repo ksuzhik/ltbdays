@@ -1,0 +1,3 @@
+$('form[data-remote]').on('ajax:success', function(xhr, status, error) {
+  $('#users').html("<%= escape_javascript(render @users)%>");
+});

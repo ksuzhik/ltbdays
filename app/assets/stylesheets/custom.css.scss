@@ -1,0 +1,137 @@
+@import "bootstrap";
+
+/* universal */
+$main_color: #428bca;
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    padding-top: 60px;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
+section {
+    overflow: auto;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+  color: $main_color;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+.navbar-custom{
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.btn-custom,
+.btn-custom:hover, 
+.btn-custom:focus, 
+.btn-custom:active { 
+    color: #fff; 
+    background-color: $main_color; 
+    border-color: $main_color; 
+    background-image: none;
+} 
+ 
+/* calendar */
+$table_border_color: #CCC;
+$table_text_color: #777;
+
+.calendar {
+    @mixin td-style($background: #FFF, $color: $table_text_color)
+    {
+        background: $background;
+        color: $color;
+        font-family: "Lucida Grande",arial,helvetica,sans-serif;
+        font-size: 10px;
+        padding: 6px;
+        border: 1px solid $table_border_color;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        th {
+            @include td-style(#EEE, $main_color);
+            text-align: center;
+            width: 14.2857142857143%;
+        }
+        td {
+            @include td-style;
+            height: 80px;
+            vertical-align: top;
+            font-size: 16px;
+        }
+    }
+    .notmonth {
+        color: $table_border_color;
+    }
+    
+    .today {
+        background-color: #D7F2FF;
+    }
+    
+    ul {
+        margin: 0;
+        margin-top: 5px;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        margin: 0;
+        padding: 0;
+        font-size: 11px;
+        text-align: center;
+    }
+    
+    .month{
+        margin: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        a, a:hover{
+            text-decoration: none;
+            padding: 0 10px;
+            color: $table_text_color;  
+        }
+    }
+}
+
+/* footer */
+
+footer {
+  margin-top: 50px;
+  padding: 5px;
+  text-align:center;
+  img{
+      width: 13%;
+  }
+}
