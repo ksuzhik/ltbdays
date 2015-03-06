@@ -1,33 +1,35 @@
 <h1>Update your profile</h1>
 
 <div class="row">
-  <div class="span6 offset3">
-    <%= form_for @user, :html => {:multipart => true} do |f| %>
-      <%= render 'shared/error_messages' %>
+  <div class="span6 offset3 text-center">
+    <%= form_for @user, :html => {:multipart => true , :class => "form-control" } do |f| %>
+      <div class="form-group">
+        <%= render 'shared/error_messages' %>
 
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name %>
-      
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name %>
-      
-      <%= f.label :birthdate %>
-      <%= f.text_field :birthdate %>
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+        <%= f.label :birthdate %>
+        <%= f.date_select :birthdate, {:prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, :start_year => 1960, :end_year => Date.today.year},  {:class => 'span2'} %>
 
-      <%= f.label :password_confirmation, "Confirm Password" %>
-      <%= f.password_field :password_confirmation %>
-      
-      <%= image_tag(@user.avatar_url) if @user.avatar? %>
-      <%= f.file_field :avatar %>
-      <%= f.hidden_field :avatar_cache %>
-      
-      <div><%= f.submit "Save changes", class: "btn btn-custom" %></div>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+
+        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.password_field :password_confirmation %>
+
+        <%= image_tag(@user.avatar_url) if @user.avatar? %>
+        <%= f.file_field :avatar %>
+        <%= f.hidden_field :avatar_cache %>
+
+        <div><%= f.submit "Save changes", class: "btn btn-custom" %></div>
+      </div>
     <% end %>
   </div>
 </div>
