@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'users#events'
   resources :users 
+  resources :password_resets
   resources :sessions, only: [:new, :create, :destroy]
   
   match '/events',  to: 'users#events',         via: 'get'

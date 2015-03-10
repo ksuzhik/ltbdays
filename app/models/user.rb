@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, on: :create
+  
   mount_uploader :avatar, AvatarUploader 
   self.per_page = 10
   
@@ -21,7 +22,14 @@ class User < ActiveRecord::Base
     end
   end
   
-  def User.new_remember_token
+  def send_password_reset
+    self.password_resets_token = User.new_token
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver_now
+  end
+  
+  def User.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -32,6 +40,6 @@ class User < ActiveRecord::Base
   private
 
     def create_remember_token
-      self.remember_token = User.encrypt(User.new_remember_token)
+      self.remember_token = User.encrypt(User.new_token)
     end
 end
