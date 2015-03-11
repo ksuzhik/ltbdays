@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#events'
+  root 'user_events#index'
   resources :users 
+  resources :user_events
   resources :password_resets
   resources :sessions, only: [:new, :create, :destroy]
   
-  match '/events',  to: 'users#events',         via: 'get'
+  match '/events',  to: 'user_events#index',   via: 'get'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
