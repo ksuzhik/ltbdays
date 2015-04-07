@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310065959) do
+ActiveRecord::Schema.define(version: 20150319102722) do
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "month",       limit: 4
+    t.decimal  "payment_sum",           precision: 10
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "user_id",     limit: 4
+  end
+
+  add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",             limit: 255,                 null: false

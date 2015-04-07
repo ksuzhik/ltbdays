@@ -13,6 +13,6 @@ class UserEventsController < ApplicationController
     def event_users(month, year)
       User.select(:id, :first_name, :last_name, :avatar,
         "STR_TO_DATE(CONCAT(DAY(birthdate), ' #{month} #{year}'),'%d %m %Y') as this_year_birthdate")
-      .where('MONTH(birthdate) = ?', month)
+      .find_by_birth_month(month)
     end
 end

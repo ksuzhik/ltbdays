@@ -14,5 +14,6 @@
 
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo
 config/initializers/app_env_vars.rb
-nbproject/
 log/
+Gemfile.lock
+*.swp

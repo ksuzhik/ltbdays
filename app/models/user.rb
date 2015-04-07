@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :payments
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   validates :first_name, presence: true, length: { maximum: 50 }
@@ -14,13 +15,10 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader 
   self.per_page = 10
   
-  def self.search(search)
-    if search && search.length > 0
-      where('first_name like ? or last_name like ?', "#{search}", "#{search}")
-    else
-      all
-    end
-  end
+  default_scope{order('first_name, last_name desc')}
+  scope :find_by_birth_month, ->(month){where('MONTH(birthdate) = ?', month) if month.present?}
+  scope :search, ->(search){where('first_name like ? or last_name like ?', "#{search}", "#{search}") if search.present? && search.length > 0}
+
   
   def send_password_reset
     self.password_resets_token = User.new_token
@@ -28,6 +26,7 @@ class User < ActiveRecord::Base
     save!
     UserMailer.password_reset(self).deliver_now
   end
+  
   
   def User.new_token
     SecureRandom.urlsafe_base64

@@ -4,10 +4,13 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'user_events#index'
+ 
   resources :users 
+  resources :admins
   resources :user_events
   resources :password_resets
   resources :sessions, only: [:new, :create, :destroy]
+  resources :user_lists
   
   match '/events',  to: 'user_events#index',   via: 'get'
   match '/signup',  to: 'users#new',            via: 'get'

@@ -2,27 +2,21 @@
 
 <div class="row">
   <div class="span6 offset3 text-center">
-    <%= form_for @user, :html => {:class => "form-control"} do |f| %>
+    <%= simple_form_for @user, :html => {:class => "form-control"} do |f| %>
       <div class="form-group">
-        <%= render 'shared/error_messages' %>
-          
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name %>
+        <%= f.error_notification %>
 
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name %>
+        <%= f.input :first_name %>
 
-        <%= f.label :email %>
-        <%= f.text_field :email %>
+        <%= f.input :last_name %>
 
-        <%= f.label :birthdate %>
+        <%= f.input :email %>
+
         <%= f.date_select :birthdate, {:prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, :start_year => 1960},  {:class => 'span2'} %>
 
-        <%= f.label :password %>
-        <%= f.password_field :password %>
+        <%= f.input :password %>
 
-        <%= f.label :password_confirmation, "Confirmation" %>
-        <%= f.password_field :password_confirmation %>
+        <%= f.input :password_confirmation %>
 
         <div><%= f.submit "Create my account", class: "btn btn-custom" %></div>
       </div>
