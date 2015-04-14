@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   root 'user_events#index'
  
   resources :users 
-  resources :admins
+  resources :admins do
+  collection do
+      get 'download_pdf'
+    end
+  end
   resources :user_events
   resources :password_resets
   resources :sessions, only: [:new, :create, :destroy]

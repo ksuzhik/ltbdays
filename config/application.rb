@@ -23,7 +23,11 @@ module Birthdays
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-    #config.time_zone = :local
-    #config.active_record.default_timezone = :local
+    config.autoload_paths << Rails.root.join('app/classes')
+    
+    config.generators do |g|
+      g.test_framework :rspec, fixtures: true, views: false
+      g.fixtures_replacement :factory_girl, dir: "spec/factories"
+    end
   end
 end

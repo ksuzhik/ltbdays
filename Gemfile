@@ -9,8 +9,10 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'faker', '1.2.0'
 gem 'watu_table_builder', :require => 'table_builder'
-gem 'prawn'
+gem 'prawn', git: 'git://github.com/sandal/prawn.git', submodules: true
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form'
+# parse xml
+gem 'nokogiri'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -52,5 +54,8 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'rspec-rails'
+  gem 'factory_girl'
 end
 
